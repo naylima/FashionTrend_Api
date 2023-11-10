@@ -8,6 +8,6 @@ namespace FashionTrend.Domain.Interfaces;
 
 public interface IProductRepository : IBaseRepository<Product>
 {
-    Task<IEnumerable<Product>> GetByMaterial(string material, CancellationToken cancellationToken);
+   
 }
 

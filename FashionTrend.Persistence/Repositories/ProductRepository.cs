@@ -16,11 +16,5 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
 	}
 
-    public async Task<IEnumerable<Product>> GetByMaterial(string material, CancellationToken cancellationToken)
-    {
-        return await context.Products
-            .Where(s => s.Materials.Any(m => m.Equals(material)))
-            .ToListAsync(cancellationToken);
-    }
 }
 

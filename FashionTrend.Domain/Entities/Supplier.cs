@@ -8,10 +8,8 @@ public class Supplier : BaseEntity
 {
 	public string Name { get; set; }
 	public string Email { get; set; }
-
-    public virtual ICollection<Material> Materials { get; set; }
+    public string Password { get; set; }
 
     [JsonIgnore]
     public virtual ICollection<Request> Requests { get; set; }
 }
-

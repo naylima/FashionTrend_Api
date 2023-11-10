@@ -8,11 +8,14 @@ public class Request : BaseEntity
 {
     public Guid? SupplierId { get; set; } 
     public Guid ProductId { get; set; }
+    public Guid? ContractId { get; set; }
     public int Quantity { get; set; }
     public RequestStatus Status { get; set; }
 
     [JsonIgnore]
-    public virtual Supplier? Supplier { get; set; }
+    public virtual Supplier Supplier { get; set; }
     [JsonIgnore]
     public virtual Product Product { get; set; }
+    [JsonIgnore]
+    public virtual Contract Contract { get; set; }
 }

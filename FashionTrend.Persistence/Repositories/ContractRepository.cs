@@ -31,12 +31,6 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
             .FirstOrDefaultAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<Contract>> GetContractsBySupplierId(Guid supplierId, CancellationToken cancellationToken)
-    {
-        return await context.Contracts
-            .Where(c => c.SupplierId.Equals(supplierId))
-            .ToListAsync(cancellationToken);
-    }
 
     public async Task<decimal> GetTotalContractValue(Guid contractId, CancellationToken cancellationToken)
     {

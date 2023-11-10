@@ -9,7 +9,6 @@ namespace FashionTrend.Domain.Interfaces;
 public interface IContractRepository : IBaseRepository<Contract>
 {
     Task<Contract> GetContractByContractNumber(string contractNumber, CancellationToken cancellationToken);
-    Task<IEnumerable<Contract>> GetContractsBySupplierId(Guid supplierId, CancellationToken cancellationToken);
     Task<IEnumerable<Contract>> GetActiveContracts(CancellationToken cancellationToken);
     Task<decimal> GetTotalContractValue(Guid contractId, CancellationToken cancellationToken);
 }

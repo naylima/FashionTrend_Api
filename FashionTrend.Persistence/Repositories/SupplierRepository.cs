@@ -21,12 +21,5 @@ public class SupplierRepository : BaseRepository<Supplier>, ISupplierRepository
 		return await context.Suppliers.FirstOrDefaultAsync(
             s => s.Email.Equals(email), cancellationToken);
 	}
-
-	public async Task<IEnumerable<Supplier>> GetByMaterial(string material, CancellationToken cancellationToken)
-	{
-        return await context.Suppliers
-            .Where(s => s.Materials.Any(m => m.Equals(material)))
-            .ToListAsync(cancellationToken);
-    }
 }
 

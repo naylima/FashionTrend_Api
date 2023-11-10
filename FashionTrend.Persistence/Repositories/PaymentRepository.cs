@@ -22,19 +22,5 @@ public class PaymentRepository : BaseRepository<Payment>, IPaymentRepository
             .Where(p => p.PaymentDate >= startDate && p.PaymentDate <= endDate)
             .ToListAsync(cancellationToken);
     }
-
-    public async Task<IEnumerable<Payment>> GetPaymentsByRequestId(Guid requestId, CancellationToken cancellationToken)
-    {
-        return await context.Payments
-            .Where(p => p.RequestId.Equals(requestId))
-            .ToListAsync(cancellationToken);
-    }
-
-    public async Task<decimal> GetTotalPaymentsByRequestId(Guid requestId, CancellationToken cancellationToken)
-    {
-        return await context.Payments
-            .Where(p => p.RequestId.Equals(requestId))
-            .SumAsync(p => p.Amount, cancellationToken);
-    }
 }
 

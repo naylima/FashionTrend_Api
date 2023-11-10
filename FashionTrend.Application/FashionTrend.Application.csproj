@@ -8,11 +8,46 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FashionTrend.Domain\FashionTrend.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="UseCases\" />
+    <None Remove="Services\" />
+    <None Remove="Shared\" />
+    <None Remove="Shared\Behavior\" />
+    <None Remove="UseCases\Supplier\" />
+    <None Remove="UseCases\Supplier\CreateSupplier\" />
+    <None Remove="UseCases\Supplier\GetAllSuppliers\" />
+    <None Remove="UseCases\Supplier\UpdateSupplier\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UseCases\" />
+    <Folder Include="Services\" />
+    <Folder Include="Shared\" />
+    <Folder Include="Shared\Behavior\" />
+    <Folder Include="UseCases\Supplier\" />
+    <Folder Include="UseCases\Supplier\CreateSupplier\" />
+    <Folder Include="UseCases\Supplier\GetAllSuppliers\" />
+    <Folder Include="UseCases\Supplier\UpdateSupplier\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />
+    <Compile Remove="UseCases\CreateSupplier\CreateSupplierMapper.cs" />
+    <Compile Remove="UseCases\CreateSupplier\CreateSupplierRequest.cs" />
+    <Compile Remove="UseCases\CreateSupplier\CreateSupplierResponse.cs" />
+    <Compile Remove="UseCases\CreateSupplier\CreateSupplierValidator.cs" />
+    <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSuppliersByMaterialHandler.cs" />
+    <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSuppliersByMaterialMapper.cs" />
+    <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSuppliersByMaterialRequest.cs" />
+    <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSupplierByMaterialResponse.cs" />
+    <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSuppliersByMaterialValidator.cs" />
   </ItemGroup>
 </Project>
