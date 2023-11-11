@@ -24,6 +24,11 @@
     <None Remove="UseCases\Supplier\CreateSupplier\" />
     <None Remove="UseCases\Supplier\GetAllSuppliers\" />
     <None Remove="UseCases\Supplier\UpdateSupplier\" />
+    <None Remove="UseCases\Product\" />
+    <None Remove="UseCases\Product\CreateProduct\" />
+    <None Remove="UseCases\Product\UpdateProduct\" />
+    <None Remove="UseCases\Product\GetAllProducts\" />
+    <None Remove="UseCases\Product\GetProduct\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -37,6 +42,11 @@
     <Folder Include="UseCases\Supplier\CreateSupplier\" />
     <Folder Include="UseCases\Supplier\GetAllSuppliers\" />
     <Folder Include="UseCases\Supplier\UpdateSupplier\" />
+    <Folder Include="UseCases\Product\" />
+    <Folder Include="UseCases\Product\CreateProduct\" />
+    <Folder Include="UseCases\Product\UpdateProduct\" />
+    <Folder Include="UseCases\Product\GetAllProducts\" />
+    <Folder Include="UseCases\Product\GetProduct\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />
@@ -49,5 +59,10 @@
     <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSuppliersByMaterialRequest.cs" />
     <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSupplierByMaterialResponse.cs" />
     <Compile Remove="UseCases\Supplier\GetSuppliersByMaterial\GetSuppliersByMaterialValidator.cs" />
+    <Compile Remove="UseCases\Product\GetSupplierByEmail\GetSupplierByEmailHandler.cs" />
+    <Compile Remove="UseCases\Product\GetSupplierByEmail\GetSupplierByEmailMapper.cs" />
+    <Compile Remove="UseCases\Product\GetSupplierByEmail\GetSupplierByEmailRequest.cs" />
+    <Compile Remove="UseCases\Product\GetSupplierByEmail\GetSupplierByEmailResponse.cs" />
+    <Compile Remove="UseCases\Product\GetSupplierByEmail\GetSupplierByEmailValidator.cs" />
   </ItemGroup>
 </Project>

@@ -15,5 +15,10 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
 	}
 
+    public async Task<Product> GetByName(string name, CancellationToken cancellationToken)
+    {
+        return await context.Products.FirstOrDefaultAsync(
+            p => p.Name.Equals(name), cancellationToken);
+    }
 }
 

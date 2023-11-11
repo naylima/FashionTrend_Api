@@ -8,6 +8,6 @@ namespace FashionTrend.Domain.Interfaces;
 
 public interface IProductRepository : IBaseRepository<Product>
 {
-   
+    Task<Product> GetByName(string name, CancellationToken cancellationToken);
 }
 

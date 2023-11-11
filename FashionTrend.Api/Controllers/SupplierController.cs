@@ -15,6 +15,22 @@ public class SupplierController : ControllerBase
 		_mediator = mediator;
 	}
 
+    [HttpGet]
+    public async Task<ActionResult<List<GetAllSuppliersResponse>>> GetAll(CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetAllSuppliersRequest(), cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpGet("{email}")]
+    public async Task<ActionResult<GetSupplierByEmailResponse>>
+        GetByEmail(string email, CancellationToken cancellationToken)
+    {
+        var request = new GetSupplierByEmailRequest(email);
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(CreateSupplierRequest request)
     {
@@ -33,21 +49,4 @@ public class SupplierController : ControllerBase
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
-
-    [HttpGet]
-    public async Task<ActionResult<List<GetAllSuppliersResponse>>> GetAll(CancellationToken cancellationToken)
-    {
-        var response = await _mediator.Send(new GetAllSuppliersRequest(), cancellationToken);
-        return Ok(response);
-    }
-
-    [HttpGet("{email}")]
-    public async Task<ActionResult<GetSupplierByEmailResponse>>
-        GetByEmail(string email, CancellationToken cancellationToken)
-    {
-        var request = new GetSupplierByEmailRequest(email);
-        var response = await _mediator.Send(request, cancellationToken);
-        return Ok(response);
-    }
 }
-
