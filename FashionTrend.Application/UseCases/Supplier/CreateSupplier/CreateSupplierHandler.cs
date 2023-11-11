@@ -26,9 +26,9 @@ public class CreateSupplierHandler : IRequestHandler<CreateSupplierRequest, Crea
         {
             var existingSupplier = await _supplierRepository.GetByEmail(request.Email, cancellationToken);
 
-            if (existingSupplier is null)
+            if (existingSupplier is not null)
             {
-                throw new InvalidOperationException("The provided email is already being used by another supplier.");
+                throw new InvalidOperationException("The provided email is already being used.");
             }
 
             var supplier = _mapper.Map<Supplier>(request);
