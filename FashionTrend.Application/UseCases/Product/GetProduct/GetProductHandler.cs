@@ -28,7 +28,7 @@ public class GetProductHandler : IRequestHandler<GetProductRequest, GetProductRe
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while retrieving all suppliers.");
+            _logger.LogError(ex, "An error occurred while retrieving product.");
             throw;
         }
     }

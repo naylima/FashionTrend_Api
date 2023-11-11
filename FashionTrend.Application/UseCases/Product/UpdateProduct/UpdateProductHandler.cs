@@ -28,7 +28,7 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductRequest, Update
 
             if (product is null)
             {
-                throw new InvalidOperationException("Product not found. The provided supplier does not exist.");
+                throw new InvalidOperationException("Product not found. The provided product does not exist.");
             }
 
             _mapper.Map(request, product);

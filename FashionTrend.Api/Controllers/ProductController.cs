@@ -34,8 +34,8 @@ public class ProductController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductRequest request)
     {
-        var supplier = await _mediator.Send(request);
-        return Ok(supplier);
+        var product = await _mediator.Send(request);
+        return Ok(product);
     }
 
     [HttpPut("{id}")]

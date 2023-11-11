@@ -29,6 +29,11 @@
     <None Remove="UseCases\Product\UpdateProduct\" />
     <None Remove="UseCases\Product\GetAllProducts\" />
     <None Remove="UseCases\Product\GetProduct\" />
+    <None Remove="UseCases\Material\" />
+    <None Remove="UseCases\Material\CreateMaterial\" />
+    <None Remove="UseCases\Material\GetAllMaterials\" />
+    <None Remove="UseCases\Material\GetMaterial\" />
+    <None Remove="UseCases\Material\UpdateMaterial\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -47,6 +52,11 @@
     <Folder Include="UseCases\Product\UpdateProduct\" />
     <Folder Include="UseCases\Product\GetAllProducts\" />
     <Folder Include="UseCases\Product\GetProduct\" />
+    <Folder Include="UseCases\Material\" />
+    <Folder Include="UseCases\Material\CreateMaterial\" />
+    <Folder Include="UseCases\Material\GetAllMaterials\" />
+    <Folder Include="UseCases\Material\GetMaterial\" />
+    <Folder Include="UseCases\Material\UpdateMaterial\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />
