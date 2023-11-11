@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FashionTrend.Domain.Interfaces;
-using FashionTrend.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +22,11 @@ public static class ServiceExtensions
 
 		service.AddScoped<IUnitOfWork, UnitOfWork>();
 		service.AddScoped<ISupplierRepository, SupplierRepository>();
+		service.AddScoped<IProductRepository, ProductRepository>();
+		service.AddScoped<IMaterialRepository, MaterialRepository>();
+		service.AddScoped<IRequestRepository, RequestRepository>();
+		service.AddScoped<IContractRepository, ContractRepository>();
+		service.AddScoped<IPaymentRepository, PaymentRepository>();
 	}
 }
 

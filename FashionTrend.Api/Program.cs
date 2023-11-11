@@ -1,26 +1,35 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using FashionTrend.Persistence.Repositories;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigurePersistenceApp(builder.Configuration);
+builder.Services.ConfigureApplicationApp();
+builder.Services.ConfigureCorsPolicy();
+
+builder.Services.AddLogging(logging =>
+{
+    logging.AddConsole();
+    logging.AddDebug();
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+DB.CreateDatabase(app);
 
+app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseCors();
 
 app.MapControllers();
 
 app.Run();
-

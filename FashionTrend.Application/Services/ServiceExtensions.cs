@@ -5,8 +5,6 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FashionTrend.Application.Services;
-
 public static class ServiceExtensions
 {
 	public static void ConfigureApplicationApp(this IServiceCollection services)

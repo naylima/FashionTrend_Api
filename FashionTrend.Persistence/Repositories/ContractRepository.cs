@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using FashionTrend.Domain.Entities;
 using FashionTrend.Domain.Enums;
 using FashionTrend.Domain.Interfaces;
-using FashionTrend.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace FashionTrend.Persistence.Repositories;
