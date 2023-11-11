@@ -1,9 +1,10 @@
 ﻿using System;
 using AutoMapper;
 using FashionTrend.Domain.Interfaces;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
-public class GetSupplierByEmailHandler
+public class GetSupplierByEmailHandler : IRequestHandler<GetSupplierByEmailRequest, GetSupplierByEmailResponse>
 {
     private readonly ISupplierRepository _supplierRepository;
     private readonly IMapper _mapper;

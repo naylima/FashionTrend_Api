@@ -2,9 +2,10 @@
 using AutoMapper;
 using FashionTrend.Domain.Entities;
 using FashionTrend.Domain.Interfaces;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
-public class UpdateSupplierHandler
+public class UpdateSupplierHandler : IRequestHandler<UpdateSupplierRequest, UpdateSupplierResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ISupplierRepository _supplierRepository;

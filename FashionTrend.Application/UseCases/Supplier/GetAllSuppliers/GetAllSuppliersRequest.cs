@@ -1,4 +1,4 @@
 ﻿using System;
 using MediatR;
 
-public sealed record GetAllSuppliersRequest () : IRequest<GetAllSuppliersResponse>;
+public sealed record GetAllSuppliersRequest () : IRequest<List<GetAllSuppliersResponse>>;

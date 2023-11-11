@@ -1,9 +1,10 @@
 ﻿using System;
 using AutoMapper;
 using FashionTrend.Domain.Interfaces;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
-public class GetAllSuppliersHandler
+public class GetAllSuppliersHandler : IRequestHandler<GetAllSuppliersRequest, List<GetAllSuppliersResponse>>
 {
     private readonly ISupplierRepository _supplierRepository;
     private readonly IMapper _mapper;
@@ -16,13 +17,13 @@ public class GetAllSuppliersHandler
         _logger = logger;
     }
 
-    public async Task<GetAllSuppliersResponse> Handle(GetAllSuppliersRequest request, CancellationToken cancellationToken)
+    public async Task<List<GetAllSuppliersResponse>> Handle(GetAllSuppliersRequest request, CancellationToken cancellationToken)
     {
         try
         {
             var suppliers = await _supplierRepository.GetAll(cancellationToken);
 
-            var response = _mapper.Map<GetAllSuppliersResponse>(suppliers);
+            var response = _mapper.Map<List<GetAllSuppliersResponse>>(suppliers);
             return response;
         }
         catch (Exception ex)
