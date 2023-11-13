@@ -35,22 +35,8 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
     {
         try
         {
-            var contract = await _contractRepository.Get(request.ContractId, cancellationToken);
-            if (contract is null)
-            {
-                throw new InvalidOperationException("Contract not found. The provided contract does not exist.");
-            }
-
-            if(contract.Status != ContractStatus.Active)
-            {
-                throw new InvalidOperationException("Contract is not active.");
-            }
-
-            var supplier = await _supplierRepository.Get(request.SupplierId, cancellationToken);
-            if (supplier is null)
-            {
-                throw new InvalidOperationException("Supplier not found. The provided supplier does not exist.");
-            }
+            var contract = await ValidateContract(request.ContractId, cancellationToken);
+            var supplier = await ValidateSupplier(request.SupplierId, cancellationToken);
 
             var requestOrder = await _requestRepository.Get(request.Id, cancellationToken);
             if (requestOrder is null)
@@ -74,6 +60,33 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
             _logger.LogError(ex, "An error occurred while updating the request with ID {RequestId}", request.Id);
             throw;
         }
+    }
+
+    private async Task<Contract> ValidateContract(Guid contractId, CancellationToken cancellationToken)
+    {
+        var contract = await _contractRepository.Get(contractId, cancellationToken);
+        if (contract is null)
+        {
+            throw new InvalidOperationException("Contract not found. The provided contract does not exist.");
+        }
+
+        if (contract.Status != ContractStatus.Active)
+        {
+            throw new InvalidOperationException("Contract is not active.");
+        }
+
+        return contract;
+    }
+
+    private async Task<Supplier> ValidateSupplier(Guid supplierId, CancellationToken cancellationToken)
+    {
+        var supplier = await _supplierRepository.Get(supplierId, cancellationToken);
+        if (supplier is null)
+        {
+            throw new InvalidOperationException("Supplier not found. The provided supplier does not exist.");
+        }
+
+        return supplier;
     }
 
 }
