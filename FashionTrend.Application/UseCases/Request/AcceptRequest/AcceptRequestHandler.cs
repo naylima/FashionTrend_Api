@@ -35,7 +35,7 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
     {
         try
         {
-            var contract = await ValidateContract(request.ContractId, cancellationToken);
+            var contract = await ValidateContract(request, cancellationToken);
             var supplier = await ValidateSupplier(request.SupplierId, cancellationToken);
 
             var requestOrder = await _requestRepository.Get(request.Id, cancellationToken);
@@ -62,13 +62,19 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
         }
     }
 
-    private async Task<Contract> ValidateContract(Guid contractId, CancellationToken cancellationToken)
+    private async Task<Contract> ValidateContract(AcceptRequestRequest request, CancellationToken cancellationToken)
     {
-        var contract = await _contractRepository.Get(contractId, cancellationToken);
+        var contract = await _contractRepository.Get(request.ContractId, cancellationToken);
         if (contract is null)
         {
             throw new InvalidOperationException("Contract not found. The provided contract does not exist.");
         }
+
+        if (contract.SupplierId != request.SupplierId)
+        {
+            throw new InvalidOperationException("Invalid contract. The contract's supplier does not match the request's supplier.");
+        }
+
 
         if (contract.Status != ContractStatus.Active)
         {
