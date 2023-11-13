@@ -9,8 +9,8 @@ namespace FashionTrend.Domain.Interfaces;
 
 public interface IRequestRepository : IBaseRepository<Request>
 {
-    Task<IEnumerable<Request>> GetBySupplier(Guid supplierId, CancellationToken cancellationToken);
-    Task<IEnumerable<Request>> GetByProduct(Guid productId, CancellationToken cancellationToken);
+    Task<IEnumerable<Request>> GetBySupplierId(Guid supplierId, CancellationToken cancellationToken);
+    Task<IEnumerable<Request>> GetByProductId(Guid productId, CancellationToken cancellationToken);
     Task<IEnumerable<Request>> GetByStatus(RequestStatus status, CancellationToken cancellationToken);
 }
 

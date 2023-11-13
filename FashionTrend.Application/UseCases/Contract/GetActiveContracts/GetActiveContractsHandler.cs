@@ -4,7 +4,7 @@ using FashionTrend.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-public class GetActiveContractsHandler : IRequestHandler<GetActiveContractsRequest, List<GetActiveContractsResponse>>
+public class GetActiveContractsHandler : IRequestHandler<GetActiveContractsRequest, IEnumerable<GetActiveContractsResponse>>
 {
     private readonly IContractRepository _contractRepository;
     private readonly IMapper _mapper;
@@ -17,13 +17,13 @@ public class GetActiveContractsHandler : IRequestHandler<GetActiveContractsReque
         _logger = logger;
     }
 
-    public async Task<List<GetActiveContractsResponse>> Handle(GetActiveContractsRequest request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<GetActiveContractsResponse>> Handle(GetActiveContractsRequest request, CancellationToken cancellationToken)
     {
         try
         {
             var contracts = await _contractRepository.GetActiveContracts(cancellationToken);
 
-            var response = _mapper.Map<List<GetActiveContractsResponse>>(contracts);
+            var response = _mapper.Map<IEnumerable<GetActiveContractsResponse>>(contracts);
             return response;
         }
         catch (Exception ex)

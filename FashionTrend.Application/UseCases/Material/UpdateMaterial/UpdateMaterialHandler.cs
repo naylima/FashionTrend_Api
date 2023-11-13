@@ -31,6 +31,7 @@ public class UpdateMaterialHandler : IRequestHandler<UpdateMaterialRequest, Upda
             }
 
             _mapper.Map(request, material);
+            _materialRepository.Update(material);
 
             await _unitOfWork.Commit(cancellationToken);
 

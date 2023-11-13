@@ -16,7 +16,8 @@ public class MaterialController : ControllerBase
 	}
 
     [HttpGet]
-    public async Task<ActionResult<List<GetAllMaterialsResponse>>> GetAll(CancellationToken cancellationToken)
+    public async Task<ActionResult<IEnumerable<GetAllMaterialsResponse>>>
+        GetAll(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetAllMaterialsRequest(), cancellationToken);
         return Ok(response);

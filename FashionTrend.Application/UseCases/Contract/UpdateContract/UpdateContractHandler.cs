@@ -33,6 +33,7 @@ public class UpdateContractHandler : IRequestHandler<UpdateContractRequest, Upda
             _mapper.Map(request, contract);
 
             await _unitOfWork.Commit(cancellationToken);
+            _contractRepository.Update(contract);
 
             return _mapper.Map<UpdateContractResponse>(contract);
         }

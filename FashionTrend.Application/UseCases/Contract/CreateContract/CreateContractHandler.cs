@@ -9,13 +9,20 @@ public class CreateContractHandler : IRequestHandler<CreateContractRequest, Crea
 {
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly IContractRepository _contractRepository;
+    private readonly ISupplierRepository _supplierRepository;
 	private readonly IMapper _mapper;
     private readonly ILogger<CreateContractHandler> _logger;
 
-    public CreateContractHandler(IUnitOfWork unitOfWork, IContractRepository contractRepository, IMapper mapper, ILogger<CreateContractHandler> logger)
+    public CreateContractHandler(
+        IUnitOfWork unitOfWork,
+        IContractRepository contractRepository,
+        ISupplierRepository supplierRepository,
+        IMapper mapper,
+        ILogger<CreateContractHandler> logger)
 	{
 		_unitOfWork = unitOfWork;
         _contractRepository = contractRepository;
+        _supplierRepository = supplierRepository;
 		_mapper = mapper;
 		_logger = logger;
 	}
@@ -24,6 +31,12 @@ public class CreateContractHandler : IRequestHandler<CreateContractRequest, Crea
 	{
         try
         {
+            var supplier = await _supplierRepository.Get(request.SupplierId, cancellationToken);
+            if (supplier is null)
+            {
+                throw new InvalidOperationException("Supplier not found. The provided supplier does not exist.");
+            }
+
             var random = new Random();
             var contractNumber = random.Next(10000, 100000).ToString();
 

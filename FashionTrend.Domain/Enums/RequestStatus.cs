@@ -4,7 +4,7 @@ namespace FashionTrend.Domain.Enums;
 public enum RequestStatus
 {
     Pending, 
-    Approved,
+    Accepted,
     Rejected,
     Completed
 }

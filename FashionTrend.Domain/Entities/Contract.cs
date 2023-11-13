@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using FashionTrend.Domain.Enums;
+using System.Text.Json.Serialization;
 
 namespace FashionTrend.Domain.Entities;
 
@@ -11,6 +12,7 @@ public class Contract : BaseEntity
     public DateTimeOffset StartDate { get; set; }
     public DateTimeOffset EndDate { get; set; }
     public ContractStatus Status { get; set; }
+    public Guid SupplierId { get; set; }
 
     public Contract ()
     {
@@ -20,5 +22,8 @@ public class Contract : BaseEntity
 
     public virtual ICollection<Request> Requests { get; set; }
     public virtual ICollection<Payment> Payments { get; set; }
+
+    [JsonIgnore]
+    public virtual Supplier Supplier { get; set; }
 }
 

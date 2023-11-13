@@ -12,7 +12,11 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductRequest, Update
     private readonly IMapper _mapper;
     private readonly ILogger<UpdateProductHandler> _logger;
 
-    public UpdateProductHandler(IUnitOfWork unitOfWork, IProductRepository productRepository, IMapper mapper, ILogger<UpdateProductHandler> logger)
+    public UpdateProductHandler(
+        IUnitOfWork unitOfWork,
+        IProductRepository productRepository,
+        IMapper mapper,
+        ILogger<UpdateProductHandler> logger)
     {
         _unitOfWork = unitOfWork;
         _productRepository = productRepository;
@@ -32,6 +36,7 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductRequest, Update
             }
 
             _mapper.Map(request, product);
+            _productRepository.Update(product);
 
             await _unitOfWork.Commit(cancellationToken);
 

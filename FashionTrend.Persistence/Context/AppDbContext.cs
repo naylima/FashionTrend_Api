@@ -43,6 +43,12 @@ public class AppDbContext : DbContext
            .HasForeignKey(r => r.ContractId)
            .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<Contract>()
+           .HasOne(c => c.Supplier)
+           .WithMany(s => s.Contracts)
+           .HasForeignKey(c => c.SupplierId)
+           .OnDelete(DeleteBehavior.Cascade);
+
         modelBuilder.Entity<Payment>()
            .HasOne(p => p.Contract)
            .WithMany(c => c.Payments)

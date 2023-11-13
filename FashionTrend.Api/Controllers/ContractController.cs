@@ -16,14 +16,16 @@ public class ContractController : ControllerBase
 	}
 
     [HttpGet]
-    public async Task<ActionResult<List<GetAllContractsResponse>>> GetAll(CancellationToken cancellationToken)
+    public async Task<ActionResult<IEnumerable<GetAllContractsResponse>>>
+        GetAll(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetAllContractsRequest(), cancellationToken);
         return Ok(response);
     }
 
     [HttpGet("active")]
-    public async Task<ActionResult<List<GetActiveContractsResponse>>> GetActive(CancellationToken cancellationToken)
+    public async Task<ActionResult<IEnumerable<GetActiveContractsResponse>>>
+        GetActive(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetActiveContractsRequest(), cancellationToken);
         return Ok(response);

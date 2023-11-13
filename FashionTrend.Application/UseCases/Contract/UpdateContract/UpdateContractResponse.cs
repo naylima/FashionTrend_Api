@@ -9,6 +9,7 @@ public class UpdateContractResponse
     public DateTimeOffset StartDate { get; set; }
     public DateTimeOffset EndDate { get; set; }
     public ContractStatus Status { get; set; }
+    public Guid SupplierId { get; set; }
     public DateTimeOffset? DateCreated { get; set; }
     public DateTimeOffset? DateUpdated { get; set; }
 

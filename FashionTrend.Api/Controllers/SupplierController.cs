@@ -16,7 +16,8 @@ public class SupplierController : ControllerBase
 	}
 
     [HttpGet]
-    public async Task<ActionResult<List<GetAllSuppliersResponse>>> GetAll(CancellationToken cancellationToken)
+    public async Task<ActionResult<IEnumerable<GetAllSuppliersResponse>>>
+        GetAll(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetAllSuppliersRequest(), cancellationToken);
         return Ok(response);

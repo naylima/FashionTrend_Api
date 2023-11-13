@@ -12,4 +12,6 @@ public class Supplier : BaseEntity
 
     [JsonIgnore]
     public virtual ICollection<Request> Requests { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<Contract> Contracts { get; set; }
 }

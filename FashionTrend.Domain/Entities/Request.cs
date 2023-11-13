@@ -14,6 +14,11 @@ public class Request : BaseEntity
 
     public decimal Value => Product.Price * Quantity;
 
+    public Request()
+    {
+        Status = RequestStatus.Pending;
+    }
+
     [JsonIgnore]
     public virtual Supplier Supplier { get; set; }
     [JsonIgnore]

@@ -32,6 +32,7 @@ public class UpdateSupplierHandler : IRequestHandler<UpdateSupplierRequest, Upda
             }
 
             _mapper.Map(request, supplier);
+            _supplierRepository.Update(supplier);
 
             await _unitOfWork.Commit(cancellationToken);
 

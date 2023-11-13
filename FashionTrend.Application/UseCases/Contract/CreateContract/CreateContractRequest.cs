@@ -6,5 +6,6 @@ public sealed record CreateContractRequest (
 	string ContractNumber,
     DateTimeOffset StartDate,
     DateTimeOffset EndDate,
-    ContractStatus Status
+    ContractStatus Status,
+    Guid SupplierId
 ) : IRequest<CreateContractResponse>;

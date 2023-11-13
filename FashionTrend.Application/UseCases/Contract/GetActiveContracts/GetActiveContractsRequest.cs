@@ -1,4 +1,4 @@
 ﻿using System;
 using MediatR;
 
-public sealed record GetActiveContractsRequest() : IRequest<List<GetActiveContractsResponse>>;
+public sealed record GetActiveContractsRequest() : IRequest<IEnumerable<GetActiveContractsResponse>>;
