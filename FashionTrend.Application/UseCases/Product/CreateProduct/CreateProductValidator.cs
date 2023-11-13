@@ -1,8 +1,6 @@
 ﻿using System;
 using FluentValidation;
 
-namespace FashionTrend.Application.UseCases.Supplier.CreateSupplier;
-
 public class CreateProductValidator : AbstractValidator<CreateProductRequest>
 {
 	public CreateProductValidator()

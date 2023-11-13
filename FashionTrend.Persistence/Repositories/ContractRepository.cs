@@ -23,7 +23,7 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Contract> GetContractByContractNumber(string contractNumber, CancellationToken cancellationToken)
+    public async Task<Contract> GetByContractNumber(string contractNumber, CancellationToken cancellationToken)
     {
         return await context.Contracts
             .Where(c => c.ContractNumber.Equals(contractNumber))

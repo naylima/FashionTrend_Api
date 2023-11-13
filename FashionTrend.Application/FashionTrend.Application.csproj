@@ -34,6 +34,12 @@
     <None Remove="UseCases\Material\GetAllMaterials\" />
     <None Remove="UseCases\Material\GetMaterial\" />
     <None Remove="UseCases\Material\UpdateMaterial\" />
+    <None Remove="UseCases\Contract\" />
+    <None Remove="UseCases\Contract\CreateContract\" />
+    <None Remove="UseCases\Contract\GetAllContracts\" />
+    <None Remove="UseCases\Contract\GetContract\" />
+    <None Remove="UseCases\Contract\UpdateContract\" />
+    <None Remove="UseCases\Contract\GetActiveContracts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -57,6 +63,12 @@
     <Folder Include="UseCases\Material\GetAllMaterials\" />
     <Folder Include="UseCases\Material\GetMaterial\" />
     <Folder Include="UseCases\Material\UpdateMaterial\" />
+    <Folder Include="UseCases\Contract\" />
+    <Folder Include="UseCases\Contract\CreateContract\" />
+    <Folder Include="UseCases\Contract\GetAllContracts\" />
+    <Folder Include="UseCases\Contract\GetContract\" />
+    <Folder Include="UseCases\Contract\UpdateContract\" />
+    <Folder Include="UseCases\Contract\GetActiveContracts\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />

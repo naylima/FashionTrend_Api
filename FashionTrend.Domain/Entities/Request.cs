@@ -12,6 +12,8 @@ public class Request : BaseEntity
     public int Quantity { get; set; }
     public RequestStatus Status { get; set; }
 
+    public decimal Value => Product.Price * Quantity;
+
     [JsonIgnore]
     public virtual Supplier Supplier { get; set; }
     [JsonIgnore]
