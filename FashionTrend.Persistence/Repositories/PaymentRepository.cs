@@ -15,7 +15,14 @@ public class PaymentRepository : BaseRepository<Payment>, IPaymentRepository
     {
     }
 
-    public async Task<IEnumerable<Payment>> GetPaymentsByDateRange(DateTime startDate, DateTime endDate, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Payment>> GetByContractId(Guid contractId, CancellationToken cancellationToken)
+    {
+        return await context.Payments
+            .Where(p => p.ContractId.Equals(contractId))
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<IEnumerable<Payment>> GetByDateRange(DateTime startDate, DateTime endDate, CancellationToken cancellationToken)
     {
         return await context.Payments
             .Where(p => p.PaymentDate >= startDate && p.PaymentDate <= endDate)

@@ -40,6 +40,10 @@
     <None Remove="UseCases\Contract\GetContract\" />
     <None Remove="UseCases\Contract\UpdateContract\" />
     <None Remove="UseCases\Contract\GetActiveContracts\" />
+    <None Remove="UseCases\Payment\" />
+    <None Remove="UseCases\Payment\CreatePayment\" />
+    <None Remove="UseCases\Payment\GetPaymentsByContractId\" />
+    <None Remove="UseCases\Payment\GetPaymentsByDateRange\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -69,6 +73,10 @@
     <Folder Include="UseCases\Contract\GetContract\" />
     <Folder Include="UseCases\Contract\UpdateContract\" />
     <Folder Include="UseCases\Contract\GetActiveContracts\" />
+    <Folder Include="UseCases\Payment\" />
+    <Folder Include="UseCases\Payment\CreatePayment\" />
+    <Folder Include="UseCases\Payment\GetPaymentsByContractId\" />
+    <Folder Include="UseCases\Payment\GetPaymentsByDateRange\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />
