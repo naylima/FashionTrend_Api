@@ -43,9 +43,8 @@ public class CreateRequestHandler : IRequestHandler<CreateRequestRequest, Create
             }
             
             var requestOrder = _mapper.Map<Request>(request);
-            requestOrder.SupplierId = null;
-            requestOrder.ContractId = null;
-            requestOrder.Status = RequestStatus.Pending;
+            requestOrder.Status = RequestStatus.Accepted;
+            requestOrder.Value = product.Price * request.Quantity;
 
             _requestRepository.Create(requestOrder);
 

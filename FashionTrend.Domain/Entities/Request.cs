@@ -11,13 +11,12 @@ public class Request : BaseEntity
     public Guid? ContractId { get; set; }
     public int Quantity { get; set; }
     public RequestStatus Status { get; set; }
+    public decimal Value { get; set; }
 
-    public decimal Value => Product.Price * Quantity;
-
     [JsonIgnore]
-    public virtual Supplier Supplier { get; set; }
+    public Product Product { get; set; }
     [JsonIgnore]
-    public virtual Product Product { get; set; }
+    public virtual Supplier? Supplier { get; set; }
     [JsonIgnore]
-    public virtual Contract Contract { get; set; }
+    public virtual Contract? Contract { get; set; }
 }
