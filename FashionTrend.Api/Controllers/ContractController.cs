@@ -40,13 +40,6 @@ public class ContractController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(CreateContractRequest request)
-    {
-        var contract = await _mediator.Send(request);
-        return Ok(contract);
-    }
-
     [HttpPut("{id}")]
     public async Task<ActionResult<UpdateContractResponse>>
         Update(Guid id, UpdateContractRequest request, CancellationToken cancellationToken)

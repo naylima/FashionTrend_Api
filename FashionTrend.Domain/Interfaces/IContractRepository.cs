@@ -10,6 +10,7 @@ public interface IContractRepository : IBaseRepository<Contract>
 {
     Task<Contract> GetByContractNumber(string contractNumber, CancellationToken cancellationToken);
     Task<IEnumerable<Contract>> GetActiveContracts(CancellationToken cancellationToken);
+    Task<Contract> GetActiveContractBySupplierId(Guid supplierId, CancellationToken cancellationToken);
     Task<decimal> GetTotalContractValue(Guid contractId, CancellationToken cancellationToken);
 }
 

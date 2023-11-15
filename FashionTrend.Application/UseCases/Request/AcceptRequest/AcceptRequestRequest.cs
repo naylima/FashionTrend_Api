@@ -3,6 +3,5 @@ using MediatR;
 
 public sealed record AcceptRequestRequest (
     Guid Id,
-    Guid SupplierId,
-    Guid ContractId
+    Guid SupplierId
 ) : IRequest<AcceptRequestResponse>;

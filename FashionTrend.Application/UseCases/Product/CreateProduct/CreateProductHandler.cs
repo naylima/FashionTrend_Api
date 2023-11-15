@@ -40,6 +40,8 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
 
             var product = _mapper.Map<Product>(request);
 
+            product.MaterialProducts ??= new List<MaterialProduct>();
+
             if (request.MaterialIds != null && request.MaterialIds.Any())
             {
                 var materials = new List<Material>();

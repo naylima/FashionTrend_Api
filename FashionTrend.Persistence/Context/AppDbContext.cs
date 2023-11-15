@@ -19,6 +19,14 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Request>()
+            .Property(r => r.SupplierId)
+            .HasDefaultValue(null);
+
+        modelBuilder.Entity<Request>()
+            .Property(r => r.ContractId)
+            .HasDefaultValue(null);
+
         modelBuilder.Entity<MaterialSupplier>()
            .HasKey(ms => new { ms.SupplierId, ms.MaterialId });
 

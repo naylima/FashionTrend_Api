@@ -43,6 +43,10 @@ public class CreateRequestHandler : IRequestHandler<CreateRequestRequest, Create
             }
             
             var requestOrder = _mapper.Map<Request>(request);
+            requestOrder.SupplierId = null;
+            requestOrder.ContractId = null;
+            requestOrder.Status = RequestStatus.Pending;
+
             _requestRepository.Create(requestOrder);
 
             await _unitOfWork.Commit(cancellationToken);

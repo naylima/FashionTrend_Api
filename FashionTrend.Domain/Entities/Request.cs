@@ -6,18 +6,13 @@ namespace FashionTrend.Domain.Entities;
 
 public class Request : BaseEntity
 {
-    public Guid? SupplierId { get; set; } 
     public Guid ProductId { get; set; }
+    public Guid? SupplierId { get; set; }
     public Guid? ContractId { get; set; }
     public int Quantity { get; set; }
     public RequestStatus Status { get; set; }
 
     public decimal Value => Product.Price * Quantity;
-
-    public Request()
-    {
-        Status = RequestStatus.Pending;
-    }
 
     [JsonIgnore]
     public virtual Supplier Supplier { get; set; }

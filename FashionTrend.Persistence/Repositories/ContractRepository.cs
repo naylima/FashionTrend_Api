@@ -30,6 +30,13 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
             .FirstOrDefaultAsync(cancellationToken);
     }
 
+    public async Task<Contract> GetActiveContractBySupplierId(Guid supplierId, CancellationToken cancellationToken)
+    {
+        return await context.Contracts
+            .Where(c => c.SupplierId.Equals(supplierId) && c.Status == ContractStatus.Active)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
 
     public async Task<decimal> GetTotalContractValue(Guid contractId, CancellationToken cancellationToken)
     {

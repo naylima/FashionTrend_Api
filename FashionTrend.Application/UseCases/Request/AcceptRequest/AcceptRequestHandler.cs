@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using AutoMapper;
 using FashionTrend.Domain.Entities;
 using FashionTrend.Domain.Enums;
@@ -35,7 +36,6 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
     {
         try
         {
-            var contract = await ValidateContract(request, cancellationToken);
             var supplier = await ValidateSupplier(request.SupplierId, cancellationToken);
 
             var requestOrder = await _requestRepository.Get(request.Id, cancellationToken);
@@ -49,6 +49,8 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
             {
                 throw new InvalidOperationException("Supplier does not have the required materials for the product.");
             }
+
+            var contract = await ValidateOrCreateContract(supplier.Id, cancellationToken);
 
             requestOrder.ContractId = contract.Id;
             requestOrder.SupplierId = supplier.Id;
@@ -68,28 +70,6 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
         }
     }
 
-    private async Task<Contract> ValidateContract(AcceptRequestRequest request, CancellationToken cancellationToken)
-    {
-        var contract = await _contractRepository.Get(request.ContractId, cancellationToken);
-        if (contract is null)
-        {
-            throw new InvalidOperationException("Contract not found. The provided contract does not exist.");
-        }
-
-        if (contract.SupplierId != request.SupplierId)
-        {
-            throw new InvalidOperationException("Invalid contract. The contract's supplier does not match the request's supplier.");
-        }
-
-
-        if (contract.Status != ContractStatus.Active)
-        {
-            throw new InvalidOperationException("Contract is not active.");
-        }
-
-        return contract;
-    }
-
     private async Task<Supplier> ValidateSupplier(Guid supplierId, CancellationToken cancellationToken)
     {
         var supplier = await _supplierRepository.Get(supplierId, cancellationToken);
@@ -104,6 +84,45 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
     private async Task<bool> SupplierHasMaterials(Guid supplierId, Guid productId, CancellationToken cancellationToken)
     {
         return await _supplierRepository.SupplierHasMaterials(supplierId, productId, cancellationToken);
+    }
+
+    private async Task<Contract> ValidateOrCreateContract(Guid supplierId, CancellationToken cancellationToken)
+    {
+        var existingContract = await _contractRepository.GetActiveContractBySupplierId(supplierId, cancellationToken);
+
+        if (existingContract == null)
+        {
+            var newContract = new Contract
+            {
+                ContractNumber = await GenerateContractNumberAsync(cancellationToken),
+                StartDate = DateTimeOffset.Now,
+                EndDate = DateTimeOffset.Now.AddYears(1),
+                Status = ContractStatus.Active,
+                SupplierId = supplierId,
+            };
+
+            _contractRepository.Create(newContract);
+            await _unitOfWork.Commit(cancellationToken);
+
+            return newContract;
+        }
+
+        return existingContract;
+    }
+
+    private async Task<string> GenerateContractNumberAsync(CancellationToken cancellationToken)
+    {
+        var random = new Random();
+        var contractNumber = random.Next(10000, 100000).ToString();
+
+        var existingContract = await _contractRepository.GetByContractNumber(contractNumber, cancellationToken);
+
+        if (existingContract is not null)
+        {
+            throw new InvalidOperationException("The provided contract number is already registered.");
+        }
+
+        return contractNumber;
     }
 }
 

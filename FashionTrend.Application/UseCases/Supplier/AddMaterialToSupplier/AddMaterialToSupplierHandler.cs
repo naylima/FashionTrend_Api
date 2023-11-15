@@ -44,7 +44,7 @@ public class AddMaterialToSupplierHandler : IRequestHandler<AddMaterialToSupplie
 
             await _unitOfWork.Commit(cancellationToken);
 
-            return _mapper.Map<AddMaterialToSupplierResponse>(supplier);
+            return _mapper.Map<AddMaterialToSupplierResponse>(materialSupplier);
         }
         catch (Exception ex)
         {
