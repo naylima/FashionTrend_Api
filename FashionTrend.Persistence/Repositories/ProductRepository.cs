@@ -20,5 +20,22 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
         return await context.Products.FirstOrDefaultAsync(
             p => p.Name.Equals(name), cancellationToken);
     }
+
+    public async Task<bool> ProductHasMaterial(Guid productId, Guid materialId, CancellationToken cancellationToken)
+    {
+        return await context.MaterialProducts
+            .AnyAsync(mp => mp.ProductId == productId && mp.MaterialId == materialId, cancellationToken);
+    }
+
+    public void AddMaterial(Guid productId, Guid materialId, CancellationToken cancellationToken)
+    {
+        var materialProduct = new MaterialProduct
+        {
+            ProductId = productId,
+            MaterialId = materialId
+        };
+
+        context.MaterialProducts.Add(materialProduct);
+    }
 }
 

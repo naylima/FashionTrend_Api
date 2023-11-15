@@ -11,5 +11,6 @@ public class Product : BaseEntity
 
     [JsonIgnore]
     public virtual ICollection<Request> Requests { get; set; }
+    public virtual ICollection<MaterialProduct> MaterialProducts { get; set; }
 }
 

@@ -8,13 +8,20 @@ using Microsoft.Extensions.Logging;
 public class CreateProductHandler : IRequestHandler<CreateProductRequest, CreateProductResponse>
 {
 	private readonly IUnitOfWork _unitOfWork;
+    private readonly IMaterialRepository _materialRepository;
 	private readonly IProductRepository _productRepository;
 	private readonly IMapper _mapper;
     private readonly ILogger<CreateProductHandler> _logger;
 
-    public CreateProductHandler(IUnitOfWork unitOfWork, IProductRepository productRepository, IMapper mapper, ILogger<CreateProductHandler> logger)
+    public CreateProductHandler(
+        IUnitOfWork unitOfWork,
+        IMaterialRepository materialRepository,
+        IProductRepository productRepository,
+        IMapper mapper,
+        ILogger<CreateProductHandler> logger)
 	{
 		_unitOfWork = unitOfWork;
+        _materialRepository = materialRepository;
 		_productRepository = productRepository;
 		_mapper = mapper;
 		_logger = logger;
@@ -32,6 +39,24 @@ public class CreateProductHandler : IRequestHandler<CreateProductRequest, Create
             }
 
             var product = _mapper.Map<Product>(request);
+
+            if (request.MaterialIds != null && request.MaterialIds.Any())
+            {
+                var materials = new List<Material>();
+
+                foreach (var materialId in request.MaterialIds)
+                {
+                    var material = await _materialRepository.Get(materialId, cancellationToken);
+
+                    if (material is null)
+                    {
+                        _logger.LogWarning("Material with ID {MaterialId} not found.", materialId);
+                    }
+
+                    product.MaterialProducts.Add(new MaterialProduct { Material = material });
+                }
+            }
+
             _productRepository.Create(product);
 
             await _unitOfWork.Commit(cancellationToken);

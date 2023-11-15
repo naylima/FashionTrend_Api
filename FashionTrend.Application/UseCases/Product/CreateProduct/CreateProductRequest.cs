@@ -4,5 +4,6 @@ using MediatR;
 public sealed record CreateProductRequest (
 	string Name,
 	string Description,
-    decimal Price
+    decimal Price,
+     List<Guid> MaterialIds
 ) : IRequest<CreateProductResponse>;
