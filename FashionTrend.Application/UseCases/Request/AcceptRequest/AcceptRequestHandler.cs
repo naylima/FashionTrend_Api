@@ -44,6 +44,12 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
                 throw new InvalidOperationException("Request not found. The provided request does not exist.");
             }
 
+            bool hasMaterials = await SupplierHasMaterials(supplier.Id, requestOrder.ProductId, cancellationToken);
+            if (!hasMaterials)
+            {
+                throw new InvalidOperationException("Supplier does not have the required materials for the product.");
+            }
+
             requestOrder.ContractId = contract.Id;
             requestOrder.SupplierId = supplier.Id;
             requestOrder.Status = RequestStatus.Accepted;
@@ -95,5 +101,9 @@ public class AcceptRequestHandler : IRequestHandler<AcceptRequestRequest, Accept
         return supplier;
     }
 
+    private async Task<bool> SupplierHasMaterials(Guid supplierId, Guid productId, CancellationToken cancellationToken)
+    {
+        return await _supplierRepository.SupplierHasMaterials(supplierId, productId, cancellationToken);
+    }
 }
 

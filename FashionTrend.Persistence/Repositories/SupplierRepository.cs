@@ -20,5 +20,13 @@ public class SupplierRepository : BaseRepository<Supplier>, ISupplierRepository
 		return await context.Suppliers.FirstOrDefaultAsync(
             s => s.Email.Equals(email), cancellationToken);
 	}
+
+    public async Task<bool> SupplierHasMaterials(Guid supplierId, Guid productId, CancellationToken cancellationToken)
+    {
+        return await context.MaterialSuppliers
+            .AnyAsync(ms => ms.SupplierId == supplierId &&
+                            context.MaterialProducts.Any(mp => mp.ProductId == productId && mp.MaterialId == ms.MaterialId),
+                cancellationToken);
+    }
 }
 
