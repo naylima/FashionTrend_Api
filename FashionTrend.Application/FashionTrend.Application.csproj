@@ -51,6 +51,7 @@
     <None Remove="UseCases\Request\GetRequestsBySupplierId\" />
     <None Remove="UseCases\Request\GetRequestsByProductId\" />
     <None Remove="UseCases\Request\AcceptRequest\" />
+    <None Remove="UseCases\Supplier\AddMaterialToSupplier\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -91,6 +92,7 @@
     <Folder Include="UseCases\Request\GetRequestsBySupplierId\" />
     <Folder Include="UseCases\Request\GetRequestsByProductId\" />
     <Folder Include="UseCases\Request\AcceptRequest\" />
+    <Folder Include="UseCases\Supplier\AddMaterialToSupplier\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />

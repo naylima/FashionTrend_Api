@@ -50,4 +50,12 @@ public class SupplierController : ControllerBase
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
+
+    [HttpPost("material")]
+    public async Task<IActionResult>
+        AddMaterial(AddMaterialToSupplierRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }

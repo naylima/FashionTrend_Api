@@ -21,12 +21,29 @@ public class SupplierRepository : BaseRepository<Supplier>, ISupplierRepository
             s => s.Email.Equals(email), cancellationToken);
 	}
 
+    public async Task<bool> SupplierHasMaterial(Guid supplierId, Guid materialId, CancellationToken cancellationToken)
+    {
+        return await context.MaterialSuppliers
+            .AnyAsync(ms => ms.SupplierId == supplierId && ms.MaterialId == materialId, cancellationToken);
+    }
+
     public async Task<bool> SupplierHasMaterials(Guid supplierId, Guid productId, CancellationToken cancellationToken)
     {
         return await context.MaterialSuppliers
             .AnyAsync(ms => ms.SupplierId == supplierId &&
                             context.MaterialProducts.Any(mp => mp.ProductId == productId && mp.MaterialId == ms.MaterialId),
                 cancellationToken);
+    }
+
+    public void AddMaterial(Guid supplierId, Guid materialId, CancellationToken cancellationToken)
+    {
+        var materialSupplier = new MaterialSupplier
+        {
+            SupplierId = supplierId,
+            MaterialId = materialId
+        };
+
+        context.MaterialSuppliers.Add(materialSupplier);
     }
 }
 
