@@ -51,11 +51,12 @@ public class SupplierController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost("material")]
-    public async Task<IActionResult>
-        AddMaterial(AddMaterialToSupplierRequest request, CancellationToken cancellationToken)
+    [HttpPost("{supplierId}")]
+    public async Task<ActionResult<IEnumerable<AddMaterialToSupplierResponse>>>
+        AddMaterial(Guid supplierId, AddMaterialToSupplierRequest request, CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(request);
+        var updatedRequest = request with { SupplierId = supplierId };
+        var response = await _mediator.Send(updatedRequest, cancellationToken);
         return Ok(response);
     }
 }

@@ -7,8 +7,8 @@ public class AddMaterialToSupplierValidator : AbstractValidator<AddMaterialToSup
 {
 	public AddMaterialToSupplierValidator()
 	{
-        RuleFor(s => s.MaterialId)
-            .NotEmpty().WithMessage("Material ID is required.");
+        RuleFor(s => s.MaterialIds)
+            .NotEmpty().WithMessage("At least one Material ID is required.");
 
         RuleFor(s => s.SupplierId)
             .NotEmpty().WithMessage("Supplier ID is required.");

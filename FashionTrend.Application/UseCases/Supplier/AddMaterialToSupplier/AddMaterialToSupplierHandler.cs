@@ -5,7 +5,7 @@ using FashionTrend.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-public class AddMaterialToSupplierHandler : IRequestHandler<AddMaterialToSupplierRequest, AddMaterialToSupplierResponse>
+public class AddMaterialToSupplierHandler : IRequestHandler<AddMaterialToSupplierRequest, IEnumerable<AddMaterialToSupplierResponse>>
 {
 	private readonly IUnitOfWork _unitOfWork;
     private readonly IMaterialRepository _materialRepository;
@@ -27,24 +27,35 @@ public class AddMaterialToSupplierHandler : IRequestHandler<AddMaterialToSupplie
 		_logger = logger;
 	}
 
-	public async Task<AddMaterialToSupplierResponse> Handle(AddMaterialToSupplierRequest request, CancellationToken cancellationToken)
+	public async Task<IEnumerable<AddMaterialToSupplierResponse>>
+        Handle(AddMaterialToSupplierRequest request, CancellationToken cancellationToken)
 	{
         try
         {
+            var responses = new List<AddMaterialToSupplierResponse>();
+
             var supplier = await ValidateSupplier(request.SupplierId, cancellationToken);
-            var material = await ValidateMaterial(request.MaterialId, cancellationToken);
+            var materials = await ValidateMaterials(request.MaterialIds, cancellationToken);
 
-            if (await SupplierHasMaterial(supplier.Id, material.Id, cancellationToken))
+            foreach (var material in materials)
             {
-                throw new InvalidOperationException("Supplier already has the specified material.");
-            }
+                if (await SupplierHasMaterial(supplier.Id, material.Id, cancellationToken))
+                {
+                    throw new InvalidOperationException($"Supplier already has the specified material {material.Id}.");
+                }
 
-            var materialSupplier = _mapper.Map<MaterialSupplier>(request);
-            _supplierRepository.AddMaterial(supplier.Id, material.Id, cancellationToken);
+                var materialSupplier = _mapper.Map<MaterialSupplier>(request);
+                _supplierRepository.AddMaterial(supplier.Id, material.Id, cancellationToken);
+
+                responses.Add(new AddMaterialToSupplierResponse
+                {
+                    MaterialId = material.Id
+                });
+            }
 
             await _unitOfWork.Commit(cancellationToken);
 
-            return _mapper.Map<AddMaterialToSupplierResponse>(materialSupplier);
+            return responses;
         }
         catch (Exception ex)
         {
@@ -64,15 +75,21 @@ public class AddMaterialToSupplierHandler : IRequestHandler<AddMaterialToSupplie
         return supplier;
     }
 
-    private async Task<Material> ValidateMaterial(Guid materialId, CancellationToken cancellationToken)
+    private async Task<List<Material>> ValidateMaterials(List<Guid> materialIds, CancellationToken cancellationToken)
     {
-        var material = await _materialRepository.Get(materialId, cancellationToken);
-        if (material is null)
+        var materials = new List<Material>();
+
+        foreach (var materialId in materialIds)
         {
-            throw new InvalidOperationException("Material not found. The provided material does not exist.");
+            var material = await _materialRepository.Get(materialId, cancellationToken);
+            if (material is null)
+            {
+                throw new InvalidOperationException("Material not found. The provided material does not exist.");
+            }
+            materials.Add(material);
         }
 
-        return material;
+        return materials;
     }
 
     private async Task<bool> SupplierHasMaterial(Guid supplierId, Guid materialId, CancellationToken cancellationToken)

@@ -6,7 +6,7 @@ public class AddMaterialToSupplierMapper : Profile
 {
 	public AddMaterialToSupplierMapper()
 	{
-		CreateMap<AddMaterialToSupplierRequest, MaterialSupplier>();
-		CreateMap<MaterialSupplier, AddMaterialToSupplierResponse>();
-	}
+        CreateMap<AddMaterialToSupplierRequest, MaterialSupplier>();
+        CreateMap<List<MaterialSupplier>, AddMaterialToSupplierResponse>();
+    }
 }
