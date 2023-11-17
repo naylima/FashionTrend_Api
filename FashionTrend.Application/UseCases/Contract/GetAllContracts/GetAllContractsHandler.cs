@@ -21,7 +21,8 @@ public class GetAllContractsHandler : IRequestHandler<GetAllContractsRequest, IE
     {
         try
         {
-            var contracts = await _contractRepository.GetAll(cancellationToken);
+            var contracts = await _contractRepository
+            .GetAll(cancellationToken);
 
             var response = _mapper.Map<IEnumerable<GetAllContractsResponse>>(contracts);
             return response;
