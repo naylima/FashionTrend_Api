@@ -21,7 +21,6 @@ public class Contract : BaseEntity
     public decimal TotalValue => Requests.Sum(r => r.Value);
 
     public virtual ICollection<Request> Requests { get; set; }
-    public virtual ICollection<Payment> Payments { get; set; }
 
     [JsonIgnore]
     public virtual Supplier Supplier { get; set; }

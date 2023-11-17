@@ -27,6 +27,7 @@ public class RequestRepository : BaseRepository<Request>, IRequestRepository
     public async Task<IEnumerable<Request>> GetByStatus(RequestStatus status, CancellationToken cancellationToken)
     {
         return await context.Requests
+            .Include(r => r.Payments)
             .Where(r => r.Status.Equals(status))
             .ToListAsync(cancellationToken);
     }
@@ -34,6 +35,7 @@ public class RequestRepository : BaseRepository<Request>, IRequestRepository
     public async Task<IEnumerable<Request>> GetBySupplierId(Guid supplierId, CancellationToken cancellationToken)
     {
         return await context.Requests
+            .Include(r => r.Payments)
             .Where(r => r.SupplierId.Equals(supplierId))
             .ToListAsync(cancellationToken);
     }

@@ -12,5 +12,4 @@ public class GetContractResponse
     public decimal TotalValue { get; set; }
 
     public ICollection<Request> Requests { get; set; }
-    public ICollection<Payment> Payments { get; set; }
 }

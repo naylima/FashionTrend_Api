@@ -11,4 +11,6 @@ public class GetRequestsBySupplierIdResponse
     public RequestStatus Status { get; set; }
 
     public decimal Value { get; }
+
+    public ICollection<Payment> Payments { get; set; }
 }

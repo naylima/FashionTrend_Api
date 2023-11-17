@@ -20,7 +20,6 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
     {
         return await context.Contracts
             .Include(c => c.Requests)
-            .Include(c => c.Payments)
             .Where(c => c.Status.Equals(contractStatus))
             .ToListAsync(cancellationToken);
     }
@@ -29,7 +28,6 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
     {
         return await context.Contracts
             .Include(c => c.Requests)
-            .Include(c => c.Payments)
             .Where(c => c.ContractNumber.Equals(contractNumber))
             .FirstOrDefaultAsync(cancellationToken);
     }
@@ -38,7 +36,6 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
     {
         return await context.Contracts
             .Include(c => c.Requests)
-            .Include(c => c.Payments)
             .Where(c => c.SupplierId.Equals(supplierId) && c.Status == ContractStatus.Active)
             .FirstOrDefaultAsync(cancellationToken);
     }
@@ -48,7 +45,6 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
     {
         return await context.Contracts
             .Include(c => c.Requests)
-            .Include(c => c.Payments)
             .Where(c => c.Id.Equals(contractId))
             .Select(c => c.TotalValue)
             .FirstOrDefaultAsync(cancellationToken);

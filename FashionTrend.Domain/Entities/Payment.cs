@@ -9,9 +9,9 @@ public class Payment : BaseEntity
     public decimal Amount { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
     public DateTimeOffset PaymentDate { get; set; }
-    public Guid ContractId { get; set; }
+    public Guid RequestId { get; set; }
 
     [JsonIgnore]
-    public virtual Contract Contract { get; set; }
+    public virtual Request Request { get; set; }
 }
 

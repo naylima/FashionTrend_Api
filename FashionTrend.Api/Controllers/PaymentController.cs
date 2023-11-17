@@ -15,15 +15,6 @@ public class PaymentController : ControllerBase
         _mediator = mediator;
 	}
 
-    [HttpGet("{contractId}")]
-    public async Task<ActionResult<IEnumerable<GetPaymentsByContractIdResponse>>>
-        GetAllByContractId(Guid contractId, CancellationToken cancellationToken)
-    {
-        var request = new GetPaymentsByContractIdRequest(contractId);
-        var response = await _mediator.Send(request, cancellationToken);
-        return Ok(response);
-    }
-
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GetPaymentsByDateRangeResponse>>>
          GetAllByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate, CancellationToken cancellationToken)

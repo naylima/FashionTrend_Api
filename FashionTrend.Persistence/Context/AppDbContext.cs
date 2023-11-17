@@ -58,9 +58,9 @@ public class AppDbContext : DbContext
            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Payment>()
-           .HasOne(p => p.Contract)
+           .HasOne(p => p.Request)
            .WithMany(c => c.Payments)
-           .HasForeignKey(p => p.ContractId)
+           .HasForeignKey(p => p.RequestId)
            .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);

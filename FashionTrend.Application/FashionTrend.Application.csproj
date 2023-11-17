@@ -38,7 +38,6 @@
     <None Remove="UseCases\Contract\GetContract\" />
     <None Remove="UseCases\Payment\" />
     <None Remove="UseCases\Payment\CreatePayment\" />
-    <None Remove="UseCases\Payment\GetPaymentsByContractId\" />
     <None Remove="UseCases\Payment\GetPaymentsByDateRange\" />
     <None Remove="UseCases\Request\" />
     <None Remove="UseCases\Request\CreateRequest\" />
@@ -77,7 +76,6 @@
     <Folder Include="UseCases\Contract\GetContract\" />
     <Folder Include="UseCases\Payment\" />
     <Folder Include="UseCases\Payment\CreatePayment\" />
-    <Folder Include="UseCases\Payment\GetPaymentsByContractId\" />
     <Folder Include="UseCases\Payment\GetPaymentsByDateRange\" />
     <Folder Include="UseCases\Request\" />
     <Folder Include="UseCases\Request\CreateRequest\" />

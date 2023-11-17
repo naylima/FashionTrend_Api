@@ -13,6 +13,8 @@ public class Request : BaseEntity
     public RequestStatus Status { get; set; }
     public decimal Value { get; set; }
 
+    public virtual ICollection<Payment> Payments { get; set; }
+
     [JsonIgnore]
     public Product Product { get; set; }
     [JsonIgnore]
