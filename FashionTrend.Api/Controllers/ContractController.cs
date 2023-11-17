@@ -1,4 +1,5 @@
 ﻿using System;
+using FashionTrend.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,27 +16,20 @@ public class ContractController : ControllerBase
 		_mediator = mediator;
 	}
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<GetAllContractsResponse>>>
-        GetAll(CancellationToken cancellationToken)
-    {
-        var response = await _mediator.Send(new GetAllContractsRequest(), cancellationToken);
-        return Ok(response);
-    }
-
-    [HttpGet("active")]
-    public async Task<ActionResult<IEnumerable<GetActiveContractsResponse>>>
-        GetActive(CancellationToken cancellationToken)
-    {
-        var response = await _mediator.Send(new GetActiveContractsRequest(), cancellationToken);
-        return Ok(response);
-    }
-
     [HttpGet("{contractNumber}")]
     public async Task<ActionResult<GetContractResponse>>
         Get(string contractNumber, CancellationToken cancellationToken)
     {
         var request = new GetContractRequest(contractNumber);
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpGet("status/{contractStatus}")]
+    public async Task<ActionResult<IEnumerable<GetContractsByStatusResponse>>>
+        GetByStatus(ContractStatus contractStatus, CancellationToken cancellationToken)
+    {
+        var request = new GetContractsByStatusRequest(contractStatus);
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }

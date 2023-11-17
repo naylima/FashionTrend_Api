@@ -2,7 +2,7 @@
 using FashionTrend.Domain.Entities;
 using FashionTrend.Domain.Enums;
 
-public class GetAllContractsResponse
+public class GetContractsByStatusResponse
 {
     public Guid Id { get; set; }
     public string ContractNumber { get; set; }

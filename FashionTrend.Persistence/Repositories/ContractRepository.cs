@@ -16,12 +16,12 @@ public class ContractRepository : BaseRepository<Contract>, IContractRepository
     {
     }
 
-    public async Task<IEnumerable<Contract>> GetActiveContracts(CancellationToken cancellationToken)
+    public async Task<IEnumerable<Contract>> GetContractsByStatus(ContractStatus contractStatus, CancellationToken cancellationToken)
     {
         return await context.Contracts
             .Include(c => c.Requests)
             .Include(c => c.Payments)
-            .Where(c => c.Status.Equals(ContractStatus.Active))
+            .Where(c => c.Status.Equals(contractStatus))
             .ToListAsync(cancellationToken);
     }
 
