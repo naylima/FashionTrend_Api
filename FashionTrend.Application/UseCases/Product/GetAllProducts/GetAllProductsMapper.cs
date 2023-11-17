@@ -6,7 +6,7 @@ public class GetAllProductsMapper : Profile
 {
 	public GetAllProductsMapper()
 	{
-        CreateMap<GetAllProductsRequest, Product>();
-        CreateMap<Product, GetAllProductsResponse>();
+        CreateMap<GetAllProductsRequest, ProductWithMaterialsDTO>();
+        CreateMap<ProductWithMaterialsDTO, GetAllProductsResponse>();
     }
 }

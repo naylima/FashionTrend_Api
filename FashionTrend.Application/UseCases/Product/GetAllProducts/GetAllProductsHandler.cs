@@ -21,7 +21,7 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProductsRequest, IEnu
     {
         try
         {
-            var products = await _productRepository.GetAll(cancellationToken);
+            var products = await _productRepository.GetWithMaterials(cancellationToken);
 
             var response = _mapper.Map<IEnumerable<GetAllProductsResponse>>(products);
             return response;

@@ -21,6 +21,23 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
             p => p.Name.Equals(name), cancellationToken);
     }
 
+    public async Task<IEnumerable<ProductWithMaterialsDTO>> GetWithMaterials(CancellationToken cancellationToken)
+    {
+        return await context.Products
+         .Include(p => p.MaterialProducts)
+             .ThenInclude(mp => mp.Material)
+         .Select(p => new ProductWithMaterialsDTO
+         {
+             Id = p.Id,
+             Name = p.Name,
+             Description = p.Description,
+             Price = p.Price,
+             DateCreated = p.DateCreated,
+             Materials = p.MaterialProducts.Select(mp => mp.Material.Name).ToList()
+         })
+         .ToListAsync(cancellationToken);
+    }
+
     public async Task<bool> ProductHasMaterial(Guid productId, Guid materialId, CancellationToken cancellationToken)
     {
         return await context.MaterialProducts
