@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using AutoMapper;
 using FashionTrend.Domain.Entities;
 using FashionTrend.Domain.Enums;
@@ -39,12 +40,14 @@ public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, Create
                 throw new InvalidOperationException("Request order not found.");
             }
 
-            ValidatePayment(requestOrder, request.Amount);
+            decimal remainingAmount = requestOrder.Value - (requestOrder.Payments.Sum(p => p.Amount) + request.Amount);
+
+            ValidatePayment(requestOrder, remainingAmount);
 
             var payment = _mapper.Map<Payment>(request);
             _paymentRepository.Create(payment);
 
-            UpdateRemainingAmount(requestOrder, request.Amount);
+            await UpdateRemainingAmount(requestOrder, request.Amount, cancellationToken);
 
             await _unitOfWork.Commit(cancellationToken);
 
@@ -64,7 +67,7 @@ public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, Create
             throw new InvalidOperationException("Payment can only be made for orders with status 'Completed'.");
         }
 
-        decimal remainingAmount = requestOrder.Value;
+        decimal remainingAmount = requestOrder.Value - requestOrder.Payments.Sum(p => p.Amount);
 
         if (paymentAmount > remainingAmount)
         {
@@ -72,13 +75,15 @@ public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, Create
         }
     }
 
-    private void UpdateRemainingAmount(Request requestOrder, decimal paymentAmount)
+    private async Task UpdateRemainingAmount(Request requestOrder, decimal paymentAmount, CancellationToken cancellationToken)
     {
-        requestOrder.Value -= paymentAmount;
+        decimal remainingAmount = requestOrder.Value - (requestOrder.Payments.Sum(p => p.Amount) + paymentAmount);
 
-        if (requestOrder.Value == 0)
+        if (requestOrder.Value <= 0)
         {
             requestOrder.Status = RequestStatus.Paid;
+            _requestRepository.Update(requestOrder);
+            await _unitOfWork.Commit(cancellationToken);
         }
     }
 }
