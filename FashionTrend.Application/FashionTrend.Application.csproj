@@ -37,7 +37,6 @@
     <None Remove="UseCases\Contract\" />
     <None Remove="UseCases\Contract\GetAllContracts\" />
     <None Remove="UseCases\Contract\GetContract\" />
-    <None Remove="UseCases\Contract\UpdateContract\" />
     <None Remove="UseCases\Contract\GetActiveContracts\" />
     <None Remove="UseCases\Payment\" />
     <None Remove="UseCases\Payment\CreatePayment\" />
@@ -51,6 +50,7 @@
     <None Remove="UseCases\Request\GetRequestsByProductId\" />
     <None Remove="UseCases\Request\AcceptRequest\" />
     <None Remove="UseCases\Supplier\AddMaterialToSupplier\" />
+    <None Remove="UseCases\Request\CompleteRequest\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -77,7 +77,6 @@
     <Folder Include="UseCases\Contract\" />
     <Folder Include="UseCases\Contract\GetAllContracts\" />
     <Folder Include="UseCases\Contract\GetContract\" />
-    <Folder Include="UseCases\Contract\UpdateContract\" />
     <Folder Include="UseCases\Contract\GetActiveContracts\" />
     <Folder Include="UseCases\Payment\" />
     <Folder Include="UseCases\Payment\CreatePayment\" />
@@ -91,6 +90,7 @@
     <Folder Include="UseCases\Request\GetRequestsByProductId\" />
     <Folder Include="UseCases\Request\AcceptRequest\" />
     <Folder Include="UseCases\Supplier\AddMaterialToSupplier\" />
+    <Folder Include="UseCases\Request\CompleteRequest\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />

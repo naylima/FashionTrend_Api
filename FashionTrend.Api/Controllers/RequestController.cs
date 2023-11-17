@@ -69,5 +69,17 @@ public class RequestController : ControllerBase
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
+
+    [HttpPut("{id}/complete")]
+    public async Task<ActionResult<CompleteRequestResponse>>
+        CompleteRequest(Guid id, CompleteRequestRequest request, CancellationToken cancellationToken)
+    {
+        if (id != request.Id)
+        {
+            return BadRequest();
+        }
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
 }
 

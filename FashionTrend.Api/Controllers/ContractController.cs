@@ -39,17 +39,5 @@ public class ContractController : ControllerBase
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
-
-    [HttpPut("{id}")]
-    public async Task<ActionResult<UpdateContractResponse>>
-        Update(Guid id, UpdateContractRequest request, CancellationToken cancellationToken)
-    {
-        if (id != request.Id)
-        {
-            return BadRequest();
-        }
-        var response = await _mediator.Send(request, cancellationToken);
-        return Ok(response);
-    }
 }
 

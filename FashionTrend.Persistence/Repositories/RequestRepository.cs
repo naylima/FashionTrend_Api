@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FashionTrend.Domain.Entities;
 using FashionTrend.Domain.Enums;
 using FashionTrend.Domain.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FashionTrend.Persistence.Repositories;
