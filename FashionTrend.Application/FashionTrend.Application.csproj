@@ -49,6 +49,8 @@
     <None Remove="UseCases\Supplier\AddMaterialToSupplier\" />
     <None Remove="UseCases\Request\CompleteRequest\" />
     <None Remove="UseCases\Contract\GetContractsByStatus\" />
+    <None Remove="UseCases\Message\" />
+    <None Remove="UseCases\Message\CreateMessage\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -87,6 +89,8 @@
     <Folder Include="UseCases\Supplier\AddMaterialToSupplier\" />
     <Folder Include="UseCases\Request\CompleteRequest\" />
     <Folder Include="UseCases\Contract\GetContractsByStatus\" />
+    <Folder Include="UseCases\Message\" />
+    <Folder Include="UseCases\Message\CreateMessage\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />
