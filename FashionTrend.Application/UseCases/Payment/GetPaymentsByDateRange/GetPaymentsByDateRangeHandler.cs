@@ -20,7 +20,8 @@ public class GetPaymentsByDateRangeHandler : IRequestHandler<GetPaymentsByDateRa
         _logger = logger;
     }
 
-    public async Task<IEnumerable<GetPaymentsByDateRangeResponse>> Handle(GetPaymentsByDateRangeRequest request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<GetPaymentsByDateRangeResponse>>
+        Handle(GetPaymentsByDateRangeRequest request, CancellationToken cancellationToken)
     {
         try
         {

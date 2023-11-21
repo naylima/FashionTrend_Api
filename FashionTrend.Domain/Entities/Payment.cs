@@ -9,9 +9,9 @@ public class Payment : BaseEntity
     public decimal Amount { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
     public DateTimeOffset PaymentDate { get; set; }
-    public Guid RequestId { get; set; }
+    public Guid OrderId { get; set; }
 
     [JsonIgnore]
-    public virtual Request Request { get; set; }
+    public virtual Order Order { get; set; }
 }
 

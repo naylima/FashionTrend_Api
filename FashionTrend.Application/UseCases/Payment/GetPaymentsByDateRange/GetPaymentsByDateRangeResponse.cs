@@ -8,4 +8,5 @@ public class GetPaymentsByDateRangeResponse
     public decimal Amount { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
     public DateTimeOffset PaymentDate { get; set; }
+    public Guid OrderId { get; set; }
 }

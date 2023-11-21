@@ -15,7 +15,7 @@ public class CreatePaymentValidator : AbstractValidator<CreatePaymentRequest>
             .NotEmpty().WithMessage("Payment date is required.")
             .LessThanOrEqualTo(DateTimeOffset.UtcNow).WithMessage("Payment date cannot be in the future.");
 
-        RuleFor(p => p.RequestId)
+        RuleFor(p => p.OrderId)
             .NotEmpty().WithMessage("Request ID is required.");
     }
 }

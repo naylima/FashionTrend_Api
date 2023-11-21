@@ -8,7 +8,7 @@ namespace FashionTrend.Domain.Interfaces;
 
 public interface IPaymentRepository : IBaseRepository<Payment>
 {
-    Task<IEnumerable<Payment>> GetByRequestId(Guid requestId, CancellationToken cancellationToken);
+    Task<IEnumerable<Payment>> GetByOrderId(Guid orderId, CancellationToken cancellationToken);
     Task<IEnumerable<Payment>> GetByDateRange(DateTime startDate, DateTime endDate, CancellationToken cancellationToken);
 }
 

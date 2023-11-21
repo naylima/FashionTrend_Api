@@ -11,7 +11,7 @@ public class AppDbContext : DbContext
 	public DbSet<Supplier> Suppliers { get; set; }
 	public DbSet<Material> Materials { get; set; }
     public DbSet<Product> Products { get; set; }
-    public DbSet<Request> Requests { get; set; }
+    public DbSet<Order> Orders { get; set; }
 	public DbSet<Payment> Payments { get; set; }
 	public DbSet<Contract> Contracts { get; set; }
     public DbSet<MaterialSupplier> MaterialSuppliers { get; set; }
@@ -19,11 +19,11 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Request>()
+        modelBuilder.Entity<Order>()
             .Property(r => r.SupplierId)
             .HasDefaultValue(null);
 
-        modelBuilder.Entity<Request>()
+        modelBuilder.Entity<Order>()
             .Property(r => r.ContractId)
             .HasDefaultValue(null);
 
@@ -33,21 +33,21 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<MaterialProduct>()
             .HasKey(mp => new { mp.ProductId, mp.MaterialId });
 
-        modelBuilder.Entity<Request>()
+        modelBuilder.Entity<Order>()
             .HasOne(r => r.Supplier)
-            .WithMany(s => s.Requests)
+            .WithMany(s => s.Orders)
             .HasForeignKey(r => r.SupplierId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Request>()
+        modelBuilder.Entity<Order>()
             .HasOne(r => r.Product)
-            .WithMany(p => p.Requests)
+            .WithMany(p => p.Orders)
             .HasForeignKey(r => r.ProductId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Request>()
+        modelBuilder.Entity<Order>()
            .HasOne(r => r.Contract)
-           .WithMany(p => p.Requests)
+           .WithMany(p => p.Orders)
            .HasForeignKey(r => r.ContractId)
            .OnDelete(DeleteBehavior.Cascade);
 
@@ -58,9 +58,9 @@ public class AppDbContext : DbContext
            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Payment>()
-           .HasOne(p => p.Request)
+           .HasOne(p => p.Order)
            .WithMany(c => c.Payments)
-           .HasForeignKey(p => p.RequestId)
+           .HasForeignKey(p => p.OrderId)
            .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);

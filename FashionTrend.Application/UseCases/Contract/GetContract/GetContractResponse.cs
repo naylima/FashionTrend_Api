@@ -11,5 +11,5 @@ public class GetContractResponse
     public ContractStatus Status { get; set; }
     public decimal TotalValue { get; set; }
 
-    public ICollection<Request> Requests { get; set; }
+    public ICollection<Order> Orders { get; set; }
 }

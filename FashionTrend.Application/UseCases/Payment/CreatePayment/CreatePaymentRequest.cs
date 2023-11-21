@@ -6,5 +6,5 @@ public sealed record CreatePaymentRequest (
     decimal Amount,
     PaymentMethod PaymentMethod,
     DateTimeOffset PaymentDate,
-    Guid RequestId
+    Guid OrderId
 ) : IRequest<CreatePaymentResponse>;

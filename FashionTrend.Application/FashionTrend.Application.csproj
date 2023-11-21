@@ -39,18 +39,11 @@
     <None Remove="UseCases\Payment\" />
     <None Remove="UseCases\Payment\CreatePayment\" />
     <None Remove="UseCases\Payment\GetPaymentsByDateRange\" />
-    <None Remove="UseCases\Request\" />
-    <None Remove="UseCases\Request\CreateRequest\" />
-    <None Remove="UseCases\Request\GetAllRequests\" />
-    <None Remove="UseCases\Request\GetRequestsByStatus\" />
-    <None Remove="UseCases\Request\GetRequestsBySupplierId\" />
-    <None Remove="UseCases\Request\GetRequestsByProductId\" />
-    <None Remove="UseCases\Request\AcceptRequest\" />
     <None Remove="UseCases\Supplier\AddMaterialToSupplier\" />
-    <None Remove="UseCases\Request\CompleteRequest\" />
     <None Remove="UseCases\Contract\GetContractsByStatus\" />
     <None Remove="UseCases\Message\" />
     <None Remove="UseCases\Message\CreateMessage\" />
+    <None Remove="UseCases\Order\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -79,18 +72,11 @@
     <Folder Include="UseCases\Payment\" />
     <Folder Include="UseCases\Payment\CreatePayment\" />
     <Folder Include="UseCases\Payment\GetPaymentsByDateRange\" />
-    <Folder Include="UseCases\Request\" />
-    <Folder Include="UseCases\Request\CreateRequest\" />
-    <Folder Include="UseCases\Request\GetAllRequests\" />
-    <Folder Include="UseCases\Request\GetRequestsByStatus\" />
-    <Folder Include="UseCases\Request\GetRequestsBySupplierId\" />
-    <Folder Include="UseCases\Request\GetRequestsByProductId\" />
-    <Folder Include="UseCases\Request\AcceptRequest\" />
     <Folder Include="UseCases\Supplier\AddMaterialToSupplier\" />
-    <Folder Include="UseCases\Request\CompleteRequest\" />
     <Folder Include="UseCases\Contract\GetContractsByStatus\" />
     <Folder Include="UseCases\Message\" />
     <Folder Include="UseCases\Message\CreateMessage\" />
+    <Folder Include="UseCases\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />

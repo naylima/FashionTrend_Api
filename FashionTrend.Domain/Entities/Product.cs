@@ -10,7 +10,7 @@ public class Product : BaseEntity
     public decimal Price { get; set; }
 
     [JsonIgnore]
-    public virtual ICollection<Request> Requests { get; set; }
+    public virtual ICollection<Order> Orders { get; set; }
     public virtual ICollection<MaterialProduct> MaterialProducts { get; set; }
 }
 

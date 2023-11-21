@@ -16,11 +16,11 @@ public class Contract : BaseEntity
 
     public Contract ()
     {
-        Requests = new List<Request>();
+        Orders = new List<Order>();
     }
-    public decimal TotalValue => Requests.Sum(r => r.Value);
+    public decimal TotalValue => Orders.Sum(r => r.Value);
 
-    public virtual ICollection<Request> Requests { get; set; }
+    public virtual ICollection<Order> Orders { get; set; }
 
     [JsonIgnore]
     public virtual Supplier Supplier { get; set; }

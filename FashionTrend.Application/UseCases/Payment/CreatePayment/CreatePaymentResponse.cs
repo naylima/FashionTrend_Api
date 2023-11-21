@@ -7,6 +7,6 @@ public class CreatePaymentResponse
     public decimal Amount { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
     public DateTimeOffset PaymentDate { get; set; }
-    public Guid RequestId { get; set; }
+    public Guid OrderId { get; set; }
 }
 

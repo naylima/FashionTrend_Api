@@ -10,20 +10,20 @@ using Microsoft.Extensions.Logging;
 public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, CreatePaymentResponse>
 {
 	private readonly IUnitOfWork _unitOfWork;
-    private readonly IRequestRepository _requestRepository;
+    private readonly IOrderRepository _orderRepository;
     private readonly IPaymentRepository _paymentRepository;
 	private readonly IMapper _mapper;
     private readonly ILogger<CreatePaymentHandler> _logger;
 
     public CreatePaymentHandler(
         IUnitOfWork unitOfWork,
-        IRequestRepository requestRepository,
+        IOrderRepository orderRepository,
         IPaymentRepository paymentRepository,
         IMapper mapper,
         ILogger<CreatePaymentHandler> logger)
 	{
 		_unitOfWork = unitOfWork;
-        _requestRepository = requestRepository;
+        _orderRepository = orderRepository;
         _paymentRepository = paymentRepository;
 		_mapper = mapper;
 		_logger = logger;
@@ -33,21 +33,21 @@ public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, Create
 	{
         try
         {
-            var requestOrder = await _requestRepository.Get(request.RequestId, cancellationToken);
+            var order = await _orderRepository.Get(request.OrderId, cancellationToken);
 
-            if (requestOrder == null)
+            if (order == null)
             {
-                throw new InvalidOperationException("Request order not found.");
+                throw new InvalidOperationException("Order not found.");
             }
 
-            decimal remainingAmount = requestOrder.Value - (requestOrder.Payments.Sum(p => p.Amount) + request.Amount);
+            decimal remainingAmount = order.Value - (order.Payments.Sum(p => p.Amount) + request.Amount);
 
-            ValidatePayment(requestOrder, remainingAmount);
+            ValidatePayment(order, remainingAmount);
 
             var payment = _mapper.Map<Payment>(request);
             _paymentRepository.Create(payment);
 
-            await UpdateRemainingAmount(requestOrder, request.Amount, cancellationToken);
+            await UpdateRemainingAmount(order, request.Amount, cancellationToken);
 
             await _unitOfWork.Commit(cancellationToken);
 
@@ -55,19 +55,19 @@ public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, Create
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while creating a new payment with request {RequestId}", request.RequestId);
+            _logger.LogError(ex, "An error occurred while creating a new payment with order {OrderId}", request.OrderId);
             throw;
         }
     }
 
-    private void ValidatePayment(Request requestOrder, decimal paymentAmount)
+    private void ValidatePayment(Order order, decimal paymentAmount)
     {
-        if (requestOrder.Status != RequestStatus.Completed)
+        if (order.Status != OrderStatus.Completed)
         {
             throw new InvalidOperationException("Payment can only be made for orders with status 'Completed'.");
         }
 
-        decimal remainingAmount = requestOrder.Value - requestOrder.Payments.Sum(p => p.Amount);
+        decimal remainingAmount = order.Value - order.Payments.Sum(p => p.Amount);
 
         if (paymentAmount > remainingAmount)
         {
@@ -75,14 +75,14 @@ public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, Create
         }
     }
 
-    private async Task UpdateRemainingAmount(Request requestOrder, decimal paymentAmount, CancellationToken cancellationToken)
+    private async Task UpdateRemainingAmount(Order order, decimal paymentAmount, CancellationToken cancellationToken)
     {
-        decimal remainingAmount = requestOrder.Value - (requestOrder.Payments.Sum(p => p.Amount) + paymentAmount);
+        decimal remainingAmount = order.Value - (order.Payments.Sum(p => p.Amount) + paymentAmount);
 
-        if (requestOrder.Value <= 0)
+        if (order.Value <= 0)
         {
-            requestOrder.Status = RequestStatus.Paid;
-            _requestRepository.Update(requestOrder);
+            order.Status = OrderStatus.Paid;
+            _orderRepository.Update(order);
             await _unitOfWork.Commit(cancellationToken);
         }
     }

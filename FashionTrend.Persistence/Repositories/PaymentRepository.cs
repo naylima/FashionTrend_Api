@@ -15,10 +15,10 @@ public class PaymentRepository : BaseRepository<Payment>, IPaymentRepository
     {
     }
 
-    public async Task<IEnumerable<Payment>> GetByRequestId(Guid requestId, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Payment>> GetByOrderId(Guid orderId, CancellationToken cancellationToken)
     {
         return await context.Payments
-            .Where(p => p.RequestId.Equals(requestId))
+            .Where(p => p.OrderId.Equals(orderId))
             .ToListAsync(cancellationToken);
     }
 
