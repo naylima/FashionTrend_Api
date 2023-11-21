@@ -65,6 +65,6 @@ Ensure the correct configuration of Kafka parameters in the `appsettings.json` f
 2. Navigate to the directory: `cd your-repository`
 3. Run the application: `dotnet run`
 
-Access Swagger at [http://localhost:5000/swagger](http://localhost:7120/swagger) to start exploring the API.
+Access Swagger at [https://localhost:7120/swagger](https://localhost:7120/swagger) to start exploring the API.
 
 **Note:** Make sure to have Kafka running or adjust the Kafka configuration for your specific environment.
