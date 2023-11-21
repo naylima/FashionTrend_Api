@@ -51,7 +51,7 @@ public class SupplierController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost("{supplierId}")]
+    [HttpPut("{supplierId}/material")]
     public async Task<ActionResult<IEnumerable<AddMaterialToSupplierResponse>>>
         AddMaterial(Guid supplierId, AddMaterialToSupplierRequest request, CancellationToken cancellationToken)
     {
