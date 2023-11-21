@@ -24,7 +24,7 @@ public class RequestController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("{status}")]
+    [HttpGet("status/{status}")]
     public async Task<ActionResult<GetRequestsByStatusResponse>>
         GetByStatus(RequestStatus status, CancellationToken cancellationToken)
     {
@@ -33,7 +33,7 @@ public class RequestController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("{productId}")]
+    [HttpGet("product/{productId}")]
     public async Task<ActionResult<IEnumerable<GetRequestsByProductIdResponse>>>
         GetByProductId(Guid productId, CancellationToken cancellationToken)
     {
@@ -42,7 +42,7 @@ public class RequestController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("{supplierId}")]
+    [HttpGet("supplier/{supplierId}")]
     public async Task<ActionResult<GetRequestsBySupplierIdResponse>>
        GetBySupplierId(Guid supplierId, CancellationToken cancellationToken)
     {
