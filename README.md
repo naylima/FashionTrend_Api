@@ -28,6 +28,8 @@ The API is documented using Swagger. Access `/swagger` to explore and interact w
    - `/api/Materials`: CRUD for materials.
    - `/api/Products`: CRUD for products.
    - `/api/Suppliers`: CRUD for suppliers.
+     
+   - `POST /api/Suppliers/{supplierId}/material`: Add a material list to a supplier.
 
 2. **Service Orders:**
    - `/api/Orders`: Creation and listing of service orders.
