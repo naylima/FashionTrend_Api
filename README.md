@@ -28,13 +28,18 @@ The API is documented using Swagger. Access `/swagger` to explore and interact w
    - `/api/Materials`: CRUD for materials.
    - `/api/Products`: CRUD for products.
    - `/api/Suppliers`: CRUD for suppliers.
+   - `GET /api/Suppliers/{email}`: Retrieve a supplier by email.
+   - `POST /api/Suppliers/{supplierId}/material`: Add a material list to a supplier.
 
 2. **Service Orders:**
    - `/api/Orders`: Creation and listing of service orders.
-   - `/api/Orders/{orderId}/accept`: Acceptance of a service order by a supplier.
+   - `GET /api/Orders/status/{status}`: Retrieve service orders by status.
+   - `GET /api/Orders/product/{productId}`: Retrieve service orders by product ID.
+   - `GET /api/Orders/supplier/{supplierId}`: Retrieve service orders by supplier ID.
+   - `PUT /api/Orders/{id}/accept`: Accept a service order by a supplier.
 
 3. **Contracts:**
-   - `/api/Contracts/status/{contractStatus}`: Listing of contracts by status.
+   - `/api/Contracts/status/{contractStatus}`: Retrieve contracts by status.
    - `/api/Contracts/{contractNumber}`: Retrieve a contract by contract number.
 
 4. **Service Completion and Payment:**
@@ -65,6 +70,6 @@ Ensure the correct configuration of Kafka parameters in the `appsettings.json` f
 2. Navigate to the directory: `cd your-repository`
 3. Run the application: `dotnet run`
 
-Access Swagger at [http://localhost:5000/swagger](http://localhost:5000/swagger) to start exploring the API.
+Access Swagger at [https://localhost:7120/swagger](https://localhost:7120/swagger) to start exploring the API.
 
 **Note:** Make sure to have Kafka running or adjust the Kafka configuration for your specific environment.
