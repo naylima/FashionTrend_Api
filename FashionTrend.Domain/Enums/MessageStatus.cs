@@ -5,6 +5,7 @@ public enum MessageStatus
 {
     InProcessing,
     WithError,
+    Retry,
     Successful
 }
 
