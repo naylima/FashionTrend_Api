@@ -12,7 +12,11 @@ public class CreateMaterialHandler : IRequestHandler<CreateMaterialRequest, Crea
 	private readonly IMapper _mapper;
     private readonly ILogger<CreateMaterialHandler> _logger;
 
-    public CreateMaterialHandler(IUnitOfWork unitOfWork, IMaterialRepository materialRepository, IMapper mapper, ILogger<CreateMaterialHandler> logger)
+    public CreateMaterialHandler(
+        IUnitOfWork unitOfWork,
+        IMaterialRepository materialRepository,
+        IMapper mapper,
+        ILogger<CreateMaterialHandler> logger)
 	{
 		_unitOfWork = unitOfWork;
         _materialRepository = materialRepository;

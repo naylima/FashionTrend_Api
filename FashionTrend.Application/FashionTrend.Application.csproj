@@ -11,6 +11,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Twilio" Version="6.15.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FashionTrend.Domain\FashionTrend.Domain.csproj" />
@@ -44,6 +45,8 @@
     <None Remove="UseCases\Message\" />
     <None Remove="UseCases\Message\CreateMessage\" />
     <None Remove="UseCases\Order\" />
+    <None Remove="UseCases\Message\ConsumerMessage\" />
+    <None Remove="UseCases\Notification\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
@@ -77,6 +80,8 @@
     <Folder Include="UseCases\Message\" />
     <Folder Include="UseCases\Message\CreateMessage\" />
     <Folder Include="UseCases\Order\" />
+    <Folder Include="UseCases\Message\ConsumerMessage\" />
+    <Folder Include="UseCases\Notification\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UseCases\CreateSupplier\CreateSupplierHandler.cs" />
