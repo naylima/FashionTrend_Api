@@ -12,7 +12,11 @@ public class CreateSupplierHandler : IRequestHandler<CreateSupplierRequest, Crea
 	private readonly IMapper _mapper;
     private readonly ILogger<CreateSupplierHandler> _logger;
 
-    public CreateSupplierHandler(IUnitOfWork unitOfWork, ISupplierRepository supplierRepository, IMapper mapper, ILogger<CreateSupplierHandler> logger)
+    public CreateSupplierHandler(
+        IUnitOfWork unitOfWork,
+        ISupplierRepository supplierRepository,
+        IMapper mapper,
+        ILogger<CreateSupplierHandler> logger)
 	{
 		_unitOfWork = unitOfWork;
 		_supplierRepository = supplierRepository;
@@ -20,7 +24,8 @@ public class CreateSupplierHandler : IRequestHandler<CreateSupplierRequest, Crea
 		_logger = logger;
 	}
 
-	public async Task<CreateSupplierResponse> Handle(CreateSupplierRequest request, CancellationToken cancellationToken)
+	public async Task<CreateSupplierResponse>
+        Handle(CreateSupplierRequest request, CancellationToken cancellationToken)
 	{
         try
         {

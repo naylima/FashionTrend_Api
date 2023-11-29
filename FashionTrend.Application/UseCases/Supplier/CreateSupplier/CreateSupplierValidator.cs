@@ -25,5 +25,9 @@ public class CreateSupplierValidator : AbstractValidator<CreateSupplierRequest>
             .Matches(@"[a-z]+").WithMessage("Your password must contain at least one lowercase letter.")
             .Matches(@"[0-9]+").WithMessage("Your password must contain at least one number.")
             .Matches(@"[\!\?\*\.]+").WithMessage("Your password must contain at least one (!? *.).");
+
+        RuleFor(s => s.PhoneNumber)
+                .NotEmpty().WithMessage("Phone number is required.")
+                .Must(phoneNumber => phoneNumber.StartsWith("+")).WithMessage("Phone number must start with '+'.");
     }
 }

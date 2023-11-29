@@ -104,6 +104,13 @@ public class AcceptOrderHandler : IRequestHandler<AcceptOrderRequest, AcceptOrde
             _contractRepository.Create(newContract);
             await _unitOfWork.Commit(cancellationToken);
 
+            var notificationHandler = new CreateNotificationHandler(
+               "ACd88dca04cf4552c810ba6f3b47a7a802",
+               "73fcbc3a5470273c768a015ce175fbc1",
+               "+12678340756");
+
+            notificationHandler.SendSMS("+5519982220048", "Hello, we have a new contract draft available.");
+
             return newContract;
         }
 
